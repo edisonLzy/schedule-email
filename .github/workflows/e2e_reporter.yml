@@ -1,0 +1,23 @@
+name: e2e reporter
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  e2e-reporter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      
+      - name: Install dependencies
+        run: npm i 
+      
+      - name: run e2e tests
+        run: npm run e2e-report
